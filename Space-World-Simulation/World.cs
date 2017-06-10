@@ -27,8 +27,28 @@ namespace Space_World_Simulation {
 			conflicts = new List<Conflict>();
 		}
 
-		public void Generate() {
-			//TODO: Generate sectors and connect them.
+		public void Generate(Sector initSector, int size) {
+			Random rand = new Random();
+			int x = 1;
+
+			List<Sector> frontier = new List<Sector>();
+			frontier.Add(initSector);
+			Sector current;
+			while(true) {
+				current = frontier[0];
+				int len = rand.Next(1, 9);
+				current.connections = new Sector[len];
+				for (int i = 0; i < len; i++) {
+					current.connections[i] = new Sector("s" + x, this);
+					frontier.Add(current.connections[i]);
+					sectors.Add(current.connections[i]);
+				}
+				frontier.Remove(current);
+				x++;
+				if (x > size) {
+					break;
+				}
+			}
 		}
 	}
 }

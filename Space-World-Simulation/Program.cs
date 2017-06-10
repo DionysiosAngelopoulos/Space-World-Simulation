@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Space_World_Simulation {
     class Program {
-        static void Main(string[] args) {
+		static void Main(string[] args) {
 
-        }
+		}
     }
 }
