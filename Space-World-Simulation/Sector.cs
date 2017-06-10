@@ -4,31 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Questia {
+namespace Space_World_Simulation {
     class Sector {
-        public Sector[] connections;
-        public List<Unit> units = new List<Unit>();
+        public Sector[] connections;	// Our connections to other sectors.
+        public List<Unit> units;		// The units contained within this sector.
+		public World world { get; private set; }
+
+		public string name;
+
+
+		public Sector(string name, World world) {
+			this.units = new List<Unit>();
+			this.world = world;
+			this.name  = name;
+		}
 
         public void Update() {
-            Random rand = new Random();
-            foreach (Unit u in units) {
-                List<Unit> con = new List<Unit>();
-                foreach (Unit u2 in units) {
-                    if (u2 == u) {
-                        continue;
-                    }
-                    if (u.faction.enemies.Contains(u2.faction)) {
-                        if (rand.Next(0, 2) == 1)  {
-                            con.Add(u2);
-                        }
-                    }
-                }
-                if (con.Count != 0) {
-                    int n = rand.Next(0, con.Count);
-                    con[n].hull -= u.dpt;
-                    // u atacks a random enemy
-                    Console.WriteLine(u.name + " -> " + con[n].name);
-                }
+			// Update each unit.
+            foreach (Unit unit in units) {
+				unit.Update(this);
             }
         }
     }

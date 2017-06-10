@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Questia {
+namespace Space_World_Simulation {
     class Unit {
-        Sector sector;
-        public Faction faction;
-        public string name;
-        public int hull = 5;
-        public int hullSpace = 2;
-        public int dpt      = 1; // Damage per tick.
-        public Unit(string name, Sector sector, Faction faction) {
-            this.name = name;
-            this.sector = sector;
+        public Faction faction;		// The factions in which the ship belongs.
+        public string name;			// The ships name.
+        public int hull = 5;        // The ships hull (Per side)
+		public Station station;		// The station the ship is currently in. (null if not in one)
+        public Unit(string name, Faction faction) {
+            this.name    = name;
             this.faction = faction;
         }
+
+		public virtual void Update(Sector sector) {
+			// Will be overriden in subclass.
+		}
     }
 }
