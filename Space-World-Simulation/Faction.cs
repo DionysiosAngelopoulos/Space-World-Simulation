@@ -8,11 +8,13 @@ namespace Space_World_Simulation {
     class Faction {
         public List<Faction> enemies;	// The factions Enemies.
 		public List<Faction> allies;	// The factions Allies.
+        public string name;
 		// Note: Every other faction considered neutral.
 
-		public Faction() {
+		public Faction(string name) {
 			enemies = new List<Faction>();
 			allies = new List<Faction>();
+            this.name = name;
 		}
 
 		public void MakeAlly(Faction faction) {
